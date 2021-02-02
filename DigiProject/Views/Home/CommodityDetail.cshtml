@@ -1,0 +1,93 @@
+﻿@model Infrastructure.DtoModels.CommodityDto
+
+@{
+    ViewBag.Title = "CommodityDetail";
+}
+
+<h2>CommodityDetail</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.AttachmentFile.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Color)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Weight)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Type)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Remaining)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SalesNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Brand)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ImmediateSending)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedTime)
+        </th>
+        <th></th>
+    </tr>
+
+
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => Model.AttachmentFile.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.Color)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.Price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.Weight)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.Type)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.Remaining)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.SalesNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.Brand)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.ImmediateSending)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.CreatedTime)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+            @Html.ActionLink("Details", "Details", new { id = Model.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id = Model.ID })
+        </td>
+    </tr>
+
+
+</table>

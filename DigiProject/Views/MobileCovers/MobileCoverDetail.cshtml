@@ -1,0 +1,186 @@
+﻿@using Services.Services
+@model DigiProject.Controllers.MobileCoverDetails
+
+@{
+    ViewBag.Title = "MobileCoverDetail";
+}
+
+
+<style>
+    th, tr {
+        text-align: center
+    }
+
+    textarea {
+        margin-left: 178px;
+        text-align-last: end;
+    }
+</style>
+
+<h2 style="text-align:center"><b>@Model.MobileCoverDto.Name</b></h2>
+
+<div style=" display: flex; JUSTIFY-CONTENT: center; ALIGN-ITEMS: center;" }>
+    @if (Model.MobileCoverDto.AttachmentImageId != null)
+    {
+        var attachmentImageSrc = new AttachmentFileService().GetAttachmentSourceValue(Model.MobileCoverDto.AttachmentImageId);
+
+        <img src="@attachmentImageSrc" alt="@Model.MobileCoverDto.Name" title="@Model.MobileCoverDto.Name" style="width:960px; height:640px;" />
+    }
+    else
+    {
+        <img src="~/img/download.png" alt="@Model.MobileCoverDto.Name" title="@Model.MobileCoverDto.Name" style="width:960px; height:640px;" />
+    }
+</div>
+
+<br />
+<br />
+
+<b style="font-size:25px">توضیحات</b>
+<p style="font-size:20px">
+    @Model.MobileCoverDto.Description
+</p>
+
+<br />
+<br />
+
+<p style="text-align:left; text-align:right">
+    <b style="font-size:20px">
+        اطلاعات محصول
+    </b>
+</p>
+<div style="overflow-x: overlay;">
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.MobileCoverDto.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MobileCoverDto.Color)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MobileCoverDto.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MobileCoverDto.Weight)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MobileCoverDto.Brand)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MobileCoverDto.ImmediateSending)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MobileCoverDto.CreatedTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MobileCoverDto.Model)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MobileCoverDto.Size)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MobileCoverDto.Material)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MobileCoverDto.SpecialFeature)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MobileCoverDto.ForMobile)
+            </th>
+            <th></th>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => Model.MobileCoverDto.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.MobileCoverDto.Color)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.MobileCoverDto.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.MobileCoverDto.Weight)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.MobileCoverDto.Brand)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.MobileCoverDto.ImmediateSending)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.MobileCoverDto.CreatedTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.MobileCoverDto.Model)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.MobileCoverDto.Size)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.MobileCoverDto.Material)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.MobileCoverDto.SpecialFeature)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.MobileCoverDto.ForMobile)
+            </td>
+        </tr>
+    </table>
+</div>
+
+
+<br />
+<br />
+<br />
+
+<b style="font-size:25px">نظرات</b>
+<hr />
+<div>
+    @if (Model.CommentDtos.Count() == 0)
+    {
+        <p style="text-align:center;font-size:30px">
+            <b>تاکنون هیچ نظری ثبت نشده است</b>
+        </p>
+    }
+    else
+    {
+        foreach (var item in Model.CommentDtos)
+        {
+            <div style="font-size:17px;">
+                <b style="color: red">@item.Name</b> می گوید:
+            </div>
+            <br />
+            <p>
+                @item.Content
+            </p>
+        }
+    }
+</div>
+<hr />
+<div>
+    <form action="@Url.Action("Create","Comments")" method="POST">
+        <div class="form-group">
+            @Html.Label("نام و نام خانوادگی", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="" style="direction: ltr;">
+                <input name="name" type="text" id="name" placeholder="نام و نام خانوادگی" class="form-control" />
+            </div>
+        </div>
+        <br />
+        <div class="form-group">
+            @Html.Label("شرح", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="" style="direction:ltr">
+                <textarea name="description" id="description" class="form-control" style="width:400px; height:200px"></textarea>
+                <input name="Id" value="@Model.MobileCoverDto.ID" hidden />
+                <input name="action" value="MobileCoverDetail" hidden />
+                <input name="controller" value="MobileCovers" hidden />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-1">
+                <input type="submit" value="Submit" class="btn btn-default" />
+            </div>
+        </div>
+    </form>
+</div>

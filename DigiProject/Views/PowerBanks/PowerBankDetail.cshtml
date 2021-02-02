@@ -1,0 +1,196 @@
+﻿@using Services.Services
+@model DigiProject.Controllers.PowerBankDetails
+
+@{
+    ViewBag.Title = "PowerBankDetail";
+}
+
+<style>
+    th, tr {
+        text-align: center
+    }
+
+    textarea {
+        margin-left: 178px;
+        text-align-last: end;
+    }
+</style>
+
+<h2 style="text-align:center"><b>@Model.PowerBankDto.Name</b></h2>
+
+<div style=" display: flex; JUSTIFY-CONTENT: center; ALIGN-ITEMS: center;" }>
+    @if (Model.PowerBankDto.AttachmentImageId != null)
+    {
+        var attachmentImageSrc = new AttachmentFileService().GetAttachmentSourceValue(Model.PowerBankDto.AttachmentImageId);
+
+        <img src="@attachmentImageSrc" alt="@Model.PowerBankDto.Name" title="@Model.PowerBankDto.Name" style="width:960px; height:640px;" />
+    }
+    else
+    {
+        <img src="~/img/download.png" alt="@Model.PowerBankDto.Name" title="@Model.PowerBankDto.Name" style="width:960px; height:640px;" />
+    }
+</div>
+
+<br />
+<br />
+
+<b style="font-size:25px">توضیحات</b>
+<p style="font-size:20px">
+    @Model.PowerBankDto.Description
+</p>
+
+<br />
+<br />
+
+<p style="text-align:left; text-align:right">
+    <b style="font-size:20px">
+        اطلاعات محصول
+    </b>
+</p>
+<div style="overflow-x: overlay;">
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PowerBankDto.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PowerBankDto.Color)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PowerBankDto.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PowerBankDto.Weight)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PowerBankDto.Brand)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PowerBankDto.ImmediateSending)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PowerBankDto.CreatedTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PowerBankDto.Model)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PowerBankDto.Flow)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PowerBankDto.Capacity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PowerBankDto.WeightClass)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PowerBankDto.SpecialFeatures)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PowerBankDto.OutputNumbers)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PowerBankDto.BodyMaterial)
+            </th>
+        </tr>
+
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => Model.PowerBankDto.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.PowerBankDto.Color)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.PowerBankDto.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.PowerBankDto.Weight)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.PowerBankDto.Brand)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.PowerBankDto.ImmediateSending)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.PowerBankDto.CreatedTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.PowerBankDto.Model)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.PowerBankDto.Flow)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.PowerBankDto.Capacity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.PowerBankDto.WeightClass)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.PowerBankDto.SpecialFeatures)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.PowerBankDto.OutputNumbers)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.PowerBankDto.BodyMaterial)
+            </td>
+        </tr>
+    </table>
+</div>
+
+<br />
+<br />
+<br />
+
+<b style="font-size:25px">نظرات</b>
+<hr />
+<div>
+    @if (Model.CommentDtos.Count() == 0)
+    {
+        <p style="text-align:center;font-size:30px">
+            <b>تاکنون هیچ نظری ثبت نشده است</b>
+        </p>
+    }
+    else
+    {
+        foreach (var item in Model.CommentDtos)
+        {
+            <div style="font-size:17px;">
+                <b style="color: red">@item.Name</b> می گوید:
+            </div>
+            <br />
+            <p>
+                @item.Content
+            </p>
+        }
+    }
+</div>
+<hr />
+<div>
+    <form action="@Url.Action("Create","Comments")" method="POST">
+        <div class="form-group">
+            @Html.Label("نام و نام خانوادگی", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="" style="direction: ltr;">
+                <input name="name" type="text" id="name" placeholder="نام و نام خانوادگی" class="form-control" />
+            </div>
+        </div>
+        <br />
+        <div class="form-group">
+            @Html.Label("شرح", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="" style="direction:ltr">
+                <textarea name="description" id="description" class="form-control" style="width:400px; height:200px"></textarea>
+                <input name="Id" value="@Model.PowerBankDto.ID" hidden />
+                <input name="action" value="PowerBankDetail" hidden />
+                <input name="controller" value="PowerBanks" hidden />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-1">
+                <input type="submit" value="Submit" class="btn btn-default" />
+            </div>
+        </div>
+    </form>
+</div>

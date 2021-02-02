@@ -1,0 +1,180 @@
+﻿@using Services.Services
+@model DigiProject.Controllers.MobileHolderDetails
+
+@{
+    ViewBag.Title = "MobileHolderDetail";
+}
+
+
+
+<style>
+    th, tr {
+        text-align: center
+    }
+
+    textarea {
+        margin-left: 178px;
+        text-align-last: end;
+    }
+</style>
+
+<h2 style="text-align:center"><b>@Model.MobileHolderDto.Name</b></h2>
+
+<div style=" display: flex; JUSTIFY-CONTENT: center; ALIGN-ITEMS: center;" }>
+    @if (Model.MobileHolderDto.AttachmentImageId != null)
+    {
+        var attachmentImageSrc = new AttachmentFileService().GetAttachmentSourceValue(Model.MobileHolderDto.AttachmentImageId);
+
+        <img src="@attachmentImageSrc" alt="@Model.MobileHolderDto.Name" title="@Model.MobileHolderDto.Name" style="width:960px; height:640px;" />
+    }
+    else
+    {
+        <img src="~/img/download.png" alt="@Model.MobileHolderDto.Name" title="@Model.MobileHolderDto.Name" style="width:960px; height:640px;" />
+    }
+</div>
+
+<br />
+<br />
+
+<b style="font-size:25px">توضیحات</b>
+<p style="font-size:20px">
+    @Model.MobileHolderDto.Description
+</p>
+
+<br />
+<br />
+
+<p style="text-align:left; text-align:right">
+    <b style="font-size:20px">
+        اطلاعات محصول
+    </b>
+</p>
+<div style="overflow-x: overlay;">
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.MobileHolderDto.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MobileHolderDto.Color)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MobileHolderDto.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MobileHolderDto.Weight)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MobileHolderDto.Brand)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MobileHolderDto.ImmediateSending)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MobileHolderDto.CreatedTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MobileHolderDto.Model)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MobileHolderDto.Rotate360)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MobileHolderDto.WirelessCharging)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MobileHolderDto.Rechargeable)
+            </th>
+        </tr>
+
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => Model.MobileHolderDto.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.MobileHolderDto.Color)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.MobileHolderDto.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.MobileHolderDto.Weight)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.MobileHolderDto.Brand)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.MobileHolderDto.ImmediateSending)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.MobileHolderDto.CreatedTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.MobileHolderDto.Model)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.MobileHolderDto.Rotate360)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.MobileHolderDto.WirelessCharging)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.MobileHolderDto.Rechargeable)
+            </td>
+        </tr>
+    </table>
+</div>
+
+<br />
+<br />
+<br />
+
+<b style="font-size:25px">نظرات</b>
+<hr />
+<div>
+    @if (Model.CommentDtos.Count() == 0)
+    {
+        <p style="text-align:center;font-size:30px">
+            <b>تاکنون هیچ نظری ثبت نشده است</b>
+        </p>
+    }
+    else
+    {
+        foreach (var item in Model.CommentDtos)
+        {
+            <div style="font-size:17px;">
+                <b style="color: red">@item.Name</b> می گوید:
+            </div>
+            <br />
+            <p>
+                @item.Content
+            </p>
+        }
+    }
+</div>
+<hr />
+<div>
+    <form action="@Url.Action("Create","Comments")" method="POST">
+        <div class="form-group">
+            @Html.Label("نام و نام خانوادگی", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="" style="direction: ltr;">
+                <input name="name" type="text" id="name" placeholder="نام و نام خانوادگی" class="form-control" />
+            </div>
+        </div>
+        <br />
+        <div class="form-group">
+            @Html.Label("شرح", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="" style="direction:ltr">
+                <textarea name="description" id="description" class="form-control" style="width:400px; height:200px"></textarea>
+                <input name="Id" value="@Model.MobileHolderDto.ID" hidden />
+                <input name="action" value="MobileHolderDetail" hidden />
+                <input name="controller" value="MobileHolders" hidden />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-1">
+                <input type="submit" value="Submit" class="btn btn-default" />
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,211 @@
+﻿@using Services.Services
+@model DigiProject.Controllers.KeyboardDetails
+
+@{
+    ViewBag.Title = "KeyboardDetail";
+}
+
+
+<style>
+    th, tr {
+        text-align: center
+    }
+
+    textarea {
+        margin-left: 178px;
+        text-align-last: end;
+    }
+</style>
+
+<h2 style="text-align:center"><b>@Model.KeyboardDto.Name</b></h2>
+
+<div style=" display: flex; JUSTIFY-CONTENT: center; ALIGN-ITEMS: center;" }>
+    @if (Model.KeyboardDto.AttachmentImageId != null)
+    {
+        var attachmentImageSrc = new AttachmentFileService().GetAttachmentSourceValue(Model.KeyboardDto.AttachmentImageId);
+
+        <img src="@attachmentImageSrc" alt="@Model.KeyboardDto.Name" title="@Model.KeyboardDto.Name" style="width:960px; height:640px;" />
+    }
+    else
+    {
+        <img src="~/img/download.png" alt="@Model.KeyboardDto.Name" title="@Model.KeyboardDto.Name" style="width:960px; height:640px;" />
+    }
+</div>
+
+<br />
+<br />
+
+<b style="font-size:25px">توضیحات</b>
+<p style="font-size:20px">
+    @Model.KeyboardDto.Description
+</p>
+
+<br />
+<br />
+
+<p style="text-align:left; text-align:right">
+    <b style="font-size:20px">
+        اطلاعات محصول
+    </b>
+</p>
+<div style="overflow-x: overlay;">
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.KeyboardDto.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.KeyboardDto.Color)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.KeyboardDto.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.KeyboardDto.Weight)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.KeyboardDto.Remaining)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.KeyboardDto.Brand)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.KeyboardDto.ImmediateSending)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.KeyboardDto.CreatedTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.KeyboardDto.Model)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.KeyboardDto.MicrophoneInput)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.KeyboardDto.USB_Input)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.KeyboardDto.ConnectionType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.KeyboardDto.ConnectorType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.KeyboardDto.Backlight)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.KeyboardDto.CarvedPersian)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.KeyboardDto.LiquidResistance)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.KeyboardDto.HaveMouse)
+            </th>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => Model.KeyboardDto.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.KeyboardDto.Color)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.KeyboardDto.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.KeyboardDto.Weight)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.KeyboardDto.Brand)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.KeyboardDto.ImmediateSending)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.KeyboardDto.CreatedTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.KeyboardDto.Model)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.KeyboardDto.MicrophoneInput)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.KeyboardDto.USB_Input)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.KeyboardDto.ConnectionType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.KeyboardDto.ConnectorType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.KeyboardDto.Backlight)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.KeyboardDto.CarvedPersian)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.KeyboardDto.LiquidResistance)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.KeyboardDto.HaveMouse)
+            </td>
+        </tr>
+    </table>
+</div>
+
+<br />
+<br />
+<br />
+
+<b style="font-size:25px">نظرات</b>
+<hr />
+<div>
+    @if (Model.CommentDtos.Count() == 0)
+    {
+        <p style="text-align:center;font-size:30px">
+            <b>تاکنون هیچ نظری ثبت نشده است</b>
+        </p>
+    }
+    else
+    {
+        foreach (var item in Model.CommentDtos)
+        {
+            <div style="font-size:17px;">
+                <b style="color: red">@item.Name</b> می گوید:
+            </div>
+            <br />
+            <p>
+                @item.Content
+            </p>
+        }
+    }
+</div>
+<hr />
+<div>
+    <form action="@Url.Action("Create","Comments")" method="POST">
+        <div class="form-group">
+            @Html.Label("نام و نام خانوادگی", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="" style="direction: ltr;">
+                <input name="name" type="text" id="name" placeholder="نام و نام خانوادگی" class="form-control" />
+            </div>
+        </div>
+        <br />
+        <div class="form-group">
+            @Html.Label("شرح", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="" style="direction:ltr">
+                <textarea name="description" id="description" class="form-control" style="width:400px; height:200px"></textarea>
+                <input name="Id" value="@Model.KeyboardDto.ID" hidden />
+                <input name="action" value="KeyboardDetail" hidden />
+                <input name="controller" value="Keyboards" hidden />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-1">
+                <input type="submit" value="Submit" class="btn btn-default" />
+            </div>
+        </div>
+    </form>
+</div>

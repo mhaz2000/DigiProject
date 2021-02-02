@@ -1,0 +1,134 @@
+﻿@using Services.Services
+@model IEnumerable<Infrastructure.DtoModels.MobileHolderDto>
+
+@{
+    ViewBag.Title = "Index";
+}
+<style>
+    th, tr {
+        text-align: center
+    }
+</style>
+<h2>Index</h2>
+
+<div style="direction:ltr">
+    @using (Html.BeginForm("Search", "MobileHolders", FormMethod.Get))
+    {
+        //the following are search options
+        <b> Search Option: </b>
+        <text>Name</text> @Html.RadioButton("option", "Name")
+        <text> Brand </text> @Html.RadioButton("option", "Brand")
+        <text>Model</text> @Html.RadioButton("option", "Model")
+
+        <br />
+
+        @Html.TextBox("search", "", new { @class = "form-control", style = "display: unset" })
+        <input type="submit" name="submit" value="Search" />
+    }
+</div>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<div style="overflow-x: overlay;">
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.AttachmentFile.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Color)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Weight)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Remaining)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SalesNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Brand)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ImmediateSending)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Model)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rotate360)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.WirelessCharging)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rechargeable)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @if (item.AttachmentImageId != null)
+                    {
+                        var attachmentImageSrc = new AttachmentFileService().GetAttachmentSourceValue(item.AttachmentImageId);
+
+                        <img src="@attachmentImageSrc" alt="@item.Name" title="@item.Name" style="width:120px; height:80px;" />
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Color)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Weight)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Remaining)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SalesNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Brand)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ImmediateSending)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Model)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rotate360)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.WirelessCharging)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rechargeable)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

@@ -1,0 +1,197 @@
+﻿@using Services.Services
+@model DigiProject.Controllers.AssembledCaseDetails
+
+@{
+    ViewBag.Title = "AssembledCaseDetail";
+}
+
+<style>
+    th, tr {
+        text-align: center
+    }
+
+    textarea {
+        margin-left: 178px;
+        text-align-last: end;
+    }
+</style>
+
+<h2 style="text-align:center"><b>@Model.AssembledCaseDto.Name</b></h2>
+
+<div style=" display: flex; JUSTIFY-CONTENT: center; ALIGN-ITEMS: center;" }>
+    @if (Model.AssembledCaseDto.AttachmentImageId != null)
+    {
+        var attachmentImageSrc = new AttachmentFileService().GetAttachmentSourceValue(Model.AssembledCaseDto.AttachmentImageId);
+
+        <img src="@attachmentImageSrc" alt="@Model.AssembledCaseDto.Name" title="@Model.AssembledCaseDto.Name" style="width:960px; height:640px;" />
+    }
+    else
+    {
+        <img src="~/img/download.png" alt="@Model.AssembledCaseDto.Name" title="@Model.AssembledCaseDto.Name" style="width:960px; height:640px;" />
+    }
+</div>
+
+<br />
+<br />
+
+<b style="font-size:25px">توضیحات</b>
+<p style="font-size:20px">
+    @Model.AssembledCaseDto.Description
+</p>
+
+<br />
+<br />
+
+<p style="text-align:left; text-align:right">
+    <b style="font-size:20px">
+        اطلاعات محصول
+    </b>
+</p>
+<div style="overflow-x: overlay;">
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.AssembledCaseDto.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AssembledCaseDto.Color)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AssembledCaseDto.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AssembledCaseDto.Weight)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AssembledCaseDto.Remaining)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AssembledCaseDto.SalesNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AssembledCaseDto.Brand)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AssembledCaseDto.ImmediateSending)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AssembledCaseDto.CreatedTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AssembledCaseDto.Model)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AssembledCaseDto.CPU_Company)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AssembledCaseDto.IntrnalStorageType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AssembledCaseDto.RAM)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AssembledCaseDto.Storage)
+            </th>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => Model.AssembledCaseDto.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.AssembledCaseDto.Color)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.AssembledCaseDto.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.AssembledCaseDto.Weight)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.AssembledCaseDto.Remaining)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.AssembledCaseDto.SalesNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.AssembledCaseDto.Brand)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.AssembledCaseDto.ImmediateSending)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.AssembledCaseDto.CreatedTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.AssembledCaseDto.Model)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.AssembledCaseDto.CPU_Company)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.AssembledCaseDto.IntrnalStorageType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.AssembledCaseDto.RAM)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.AssembledCaseDto.Storage)
+            </td>
+
+        </tr>
+    </table>
+</div>
+<br />
+<br />
+<br />
+
+<b style="font-size:25px">نظرات</b>
+<hr />
+<div>
+    @if (Model.CommentDtos.Count() == 0)
+    {
+        <p style="text-align:center;font-size:30px">
+            <b>تاکنون هیچ نظری ثبت نشده است</b>
+        </p>
+    }
+    else
+    {
+        foreach (var item in Model.CommentDtos)
+        {
+            <div style="font-size:17px;">
+                <b style="color: red">@item.Name</b> می گوید:
+            </div>
+            <br />
+            <p>
+                @item.Content
+            </p>
+        }
+    }
+</div>
+<hr />
+<div>
+    <form action="@Url.Action("Create","Comments")" method="POST">
+        <div class="form-group">
+            @Html.Label("نام و نام خانوادگی", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="" style="direction: ltr;">
+                <input name="name" type="text" id="name" placeholder="نام و نام خانوادگی" class="form-control" />
+                @*@Html.EditorFor(model => model.NewComment.Name, new { htmlAttributes = new { @class = "form-control" } })*@
+            </div>
+        </div>
+        <br />
+        <div class="form-group">
+            @Html.Label("شرح", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="" style="direction:ltr">
+                <textarea name="description" id="description" class="form-control" style="width:400px; height:200px"></textarea>
+                <input name="Id" value="@Model.AssembledCaseDto.ID" hidden />
+                <input name="action" value="AssembledCaseDetail" hidden />
+                <input name="controller" value="AssembledCases" hidden />
+                @*@Html.TextAreaFor(model => model.NewComment.Content, new { htmlAttributes = new { @class = "form-control", cols = "20" }, style = "width: 400px; height: 200px; display: block;" })*@
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-1">
+                <input type="submit" value="Submit" class="btn btn-default" />
+            </div>
+        </div>
+    </form>
+</div>

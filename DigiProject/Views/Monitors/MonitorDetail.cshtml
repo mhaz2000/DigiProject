@@ -1,0 +1,210 @@
+﻿@using Services.Services
+@model DigiProject.Controllers.MonitorDetails
+
+@{
+    ViewBag.Title = "MonitorDetail";
+}
+
+
+<style>
+    th, tr {
+        text-align: center
+    }
+
+    textarea {
+        margin-left: 178px;
+        text-align-last: end;
+    }
+</style>
+
+<h2 style="text-align:center"><b>@Model.MonitorDto.Name</b></h2>
+
+<div style=" display: flex; JUSTIFY-CONTENT: center; ALIGN-ITEMS: center;" }>
+    @if (Model.MonitorDto.AttachmentImageId != null)
+    {
+        var attachmentImageSrc = new AttachmentFileService().GetAttachmentSourceValue(Model.MonitorDto.AttachmentImageId);
+
+        <img src="@attachmentImageSrc" alt="@Model.MonitorDto.Name" title="@Model.MonitorDto.Name" style="width:960px; height:640px;" />
+    }
+    else
+    {
+        <img src="~/img/download.png" alt="@Model.MonitorDto.Name" title="@Model.MonitorDto.Name" style="width:960px; height:640px;" />
+    }
+</div>
+
+<br />
+<br />
+
+<b style="font-size:25px">توضیحات</b>
+<p style="font-size:20px">
+    @Model.MonitorDto.Description
+</p>
+
+<br />
+<br />
+
+<p style="text-align:left; text-align:right">
+    <b style="font-size:20px">
+        اطلاعات محصول
+    </b>
+</p>
+<div style="overflow-x: overlay;">
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.MonitorDto.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MonitorDto.Color)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MonitorDto.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MonitorDto.Weight)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MonitorDto.Brand)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MonitorDto.ImmediateSending)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MonitorDto.CreatedTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MonitorDto.Model)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MonitorDto.Backlight)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MonitorDto.HDMI_Port)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MonitorDto.USB_Port)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MonitorDto.DVI_Port)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MonitorDto.Resolution)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MonitorDto.ResponseTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MonitorDto.PanelType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MonitorDto.Speaker)
+            </th>
+        </tr>
+
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => Model.MonitorDto.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.MonitorDto.Color)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.MonitorDto.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.MonitorDto.Weight)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.MonitorDto.Brand)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.MonitorDto.ImmediateSending)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.MonitorDto.CreatedTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.MonitorDto.Model)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.MonitorDto.Backlight)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.MonitorDto.HDMI_Port)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.MonitorDto.USB_Port)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.MonitorDto.DVI_Port)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.MonitorDto.Resolution)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.MonitorDto.ResponseTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.MonitorDto.PanelType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.MonitorDto.Speaker)
+            </td>
+        </tr>
+
+    </table>
+</div>
+
+<br />
+<br />
+<br />
+
+<b style="font-size:25px">نظرات</b>
+<hr />
+<div>
+    @if (Model.CommentDtos.Count() == 0)
+    {
+        <p style="text-align:center;font-size:30px">
+            <b>تاکنون هیچ نظری ثبت نشده است</b>
+        </p>
+    }
+    else
+    {
+        foreach (var item in Model.CommentDtos)
+        {
+            <div style="font-size:17px;">
+                <b style="color: red">@item.Name</b> می گوید:
+            </div>
+            <br />
+            <p>
+                @item.Content
+            </p>
+        }
+    }
+</div>
+<hr />
+<div>
+    <form action="@Url.Action("Create","Comments")" method="POST">
+        <div class="form-group">
+            @Html.Label("نام و نام خانوادگی", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="" style="direction: ltr;">
+                <input name="name" type="text" id="name" placeholder="نام و نام خانوادگی" class="form-control" />
+            </div>
+        </div>
+        <br />
+        <div class="form-group">
+            @Html.Label("شرح", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="" style="direction:ltr">
+                <textarea name="description" id="description" class="form-control" style="width:400px; height:200px"></textarea>
+                <input name="Id" value="@Model.MonitorDto.ID" hidden />
+                <input name="action" value="MonitorDetail" hidden />
+                <input name="controller" value="Monitors" hidden />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-1">
+                <input type="submit" value="Submit" class="btn btn-default" />
+            </div>
+        </div>
+    </form>
+</div>

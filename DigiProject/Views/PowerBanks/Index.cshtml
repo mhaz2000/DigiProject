@@ -1,0 +1,149 @@
+﻿@using Services.Services
+@model IEnumerable<Infrastructure.DtoModels.PowerBankDto>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<div style="direction:ltr">
+    @using (Html.BeginForm("Search", "PowerBanks", FormMethod.Get))
+    {
+        //the following are search options
+        <b> Search Option: </b>
+        <text>Name</text> @Html.RadioButton("option", "Name")
+        <text> Brand </text> @Html.RadioButton("option", "Brand")
+        <text>Model</text> @Html.RadioButton("option", "Model")
+
+        <br />
+
+        @Html.TextBox("search", "", new { @class = "form-control", style = "display: unset" })
+        <input type="submit" name="submit" value="Search" />
+    }
+</div>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<div style="overflow-x: overlay;">
+    <table class="table">
+        <tr>
+            <th style="text-align:center">
+                @Html.DisplayNameFor(model => model.AttachmentFile.Title)
+            </th>
+            <th style="text-align:center">
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th style="text-align:center">
+                @Html.DisplayNameFor(model => model.Color)
+            </th>
+            <th style="text-align:center">
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th style="text-align:center">
+                @Html.DisplayNameFor(model => model.Weight)
+            </th>
+            <th style="text-align:center">
+                @Html.DisplayNameFor(model => model.Remaining)
+            </th>
+            <th style="text-align:center">
+                @Html.DisplayNameFor(model => model.SalesNumber)
+            </th>
+            <th style="text-align:center">
+                @Html.DisplayNameFor(model => model.Brand)
+            </th>
+            <th style="text-align:center">
+                @Html.DisplayNameFor(model => model.ImmediateSending)
+            </th>
+            <th style="text-align:center">
+                @Html.DisplayNameFor(model => model.Model)
+            </th>
+            <th style="text-align:center">
+                @Html.DisplayNameFor(model => model.Flow)
+            </th>
+            <th style="text-align:center">
+                @Html.DisplayNameFor(model => model.Capacity)
+            </th>
+            <th style="text-align:center">
+                @Html.DisplayNameFor(model => model.WeightClass)
+            </th>
+            <th style="text-align:center">
+                @Html.DisplayNameFor(model => model.SpecialFeatures)
+            </th>
+            <th style="text-align:center">
+                @Html.DisplayNameFor(model => model.OutputNumbers)
+            </th>
+            <th style="text-align:center">
+                @Html.DisplayNameFor(model => model.BodyMaterial)
+            </th>
+            <th style="text-align:center">
+                @Html.Label("Actions")
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @if (item.AttachmentImageId != null)
+                    {
+                        var attachmentImageSrc = new AttachmentFileService().GetAttachmentSourceValue(item.AttachmentImageId);
+
+                        <img src="@attachmentImageSrc" alt="@item.Name" title="@item.Name" style="width:120px; height:80px;" />
+                    }
+                </td>
+                <td style="text-align:center">
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td style="text-align:center">
+                    @Html.DisplayFor(modelItem => item.Color)
+                </td>
+                <td style="text-align:center">
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td style="text-align:center">
+                    @Html.DisplayFor(modelItem => item.Weight)
+                </td>
+                <td style="text-align:center">
+                    @Html.DisplayFor(modelItem => item.Remaining)
+                </td>
+                <td style="text-align:center">
+                    @Html.DisplayFor(modelItem => item.SalesNumber)
+                </td>
+                <td style="text-align:center">
+                    @Html.DisplayFor(modelItem => item.Brand)
+                </td>
+                <td style="text-align:center">
+                    @Html.DisplayFor(modelItem => item.ImmediateSending)
+                </td>
+                <td style="text-align:center">
+                    @Html.DisplayFor(modelItem => item.Model)
+                </td>
+                <td style="text-align:center">
+                    @Html.DisplayFor(modelItem => item.Flow)
+                </td>
+                <td style="text-align:center">
+                    @Html.DisplayFor(modelItem => item.Capacity)
+                </td>
+                <td style="text-align:center">
+                    @Html.DisplayFor(modelItem => item.WeightClass)
+                </td>
+                <td style="text-align:center">
+                    @Html.DisplayFor(modelItem => item.SpecialFeatures)
+                </td>
+                <td style="text-align:center">
+                    @Html.DisplayFor(modelItem => item.OutputNumbers)
+                </td>
+                <td style="text-align:center">
+                    @Html.DisplayFor(modelItem => item.BodyMaterial)
+                </td>
+                <td style="text-align:center">
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

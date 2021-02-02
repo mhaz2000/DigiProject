@@ -1,0 +1,390 @@
+﻿@using Services.Services;
+@using Infrastructure.DtoModels;
+@model IEnumerable<CommodityDto>
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+
+
+<p style=" text-align: center; padding: 50px; font-size: 20px; font-weight: bold;">
+    نیمچه دی جی کالا :)
+</p>
+
+
+<div style="display:flex;justify-content:center">
+    @using (Html.BeginForm("Search", "Home", FormMethod.Get, new { style = "display:flex;" }))
+    {
+        @Html.TextBox("search", "", new { @class = "form-control", style = "display: unset" })
+        <input type="submit" name="submit" value="Search" />
+    }
+</div>
+
+<br />
+<br />
+<br />
+
+<div class="main-news">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="row">
+                    @{
+                        string[] route = new string[2];
+                    }
+                    @foreach (var item in Model)
+                    {
+                        string source;
+                        if (item.AttachmentImageId == null)
+                        {
+                            source = "/img/download.png";
+                        }
+                        else
+                        {
+                            source = new AttachmentFileService().GetAttachmentSourceValue(item.AttachmentImageId);
+                        }
+                        <div class="col-md-4">
+                            <div class="mn-img">
+
+                                @switch (item.Type)
+                                {
+                                    case Enums.CommodityType.AssembledCase:
+                                        route[0] = "AssembledCaseDetail";
+                                        route[1] = "AssembledCases";
+                                        break;
+                                    case Enums.CommodityType.ExternalHard:
+                                        route[0] = "ExternalHardDetail";
+                                        route[1] = "ExternalHards";
+                                        break;
+                                    case Enums.CommodityType.Keyboard:
+                                        route[0] = "KeyboardDetail";
+                                        route[1] = "Keyboards";
+                                        break;
+                                    case Enums.CommodityType.Laptop:
+                                        route[0] = "LaptopDetail";
+                                        route[1] = "Laptops";
+                                        break;
+                                    case Enums.CommodityType.Mobile:
+                                        route[0] = "MobileDetail";
+                                        route[1] = "Mobiles";
+                                        break;
+                                    case Enums.CommodityType.MobileCover:
+                                        route[0] = "MobileCoverDetail";
+                                        route[1] = "MobileCovers";
+                                        break;
+                                    case Enums.CommodityType.MobileHolder:
+                                        route[0] = "MobileHolderDetail";
+                                        route[1] = "MobileHolders";
+                                        break;
+                                    case Enums.CommodityType.Monitor:
+                                        route[0] = "MonitorDetail";
+                                        route[1] = "Monitors";
+                                        break;
+                                    case Enums.CommodityType.PowerBank:
+                                        route[0] = "PowerBankDetail";
+                                        route[1] = "PowerBanks";
+                                        break;
+                                }
+                                <a href="@Url.Action(route[0],route[1],new { Id = item.ID})">
+                                    <img src="@source" style="width:350px; height:223px;" />
+                                    <div class="mn-title" style="text-align:center;">
+                                        <b>@item.Name</b>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+
+
+                        @*<div class="col-md-4">
+                                <div class="mn-img">
+                                    <img src="~/img/news-350x223-3.jpg" />
+                                    <div class="mn-title">
+                                        <a href="">Lorem ipsum dolor sit</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="mn-img">
+                                    <img src="~/img/news-350x223-3.jpg" />
+                                    <div class="mn-title">
+                                        <a href="">Lorem ipsum dolor sit</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="mn-img">
+                                    <img src="~/img/news-350x223-3.jpg" />
+                                    <div class="mn-title">
+                                        <a href="">Lorem ipsum dolor sit</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="mn-img">
+                                    <img src="~/img/news-350x223-3.jpg" />
+                                    <div class="mn-title">
+                                        <a href="">Lorem ipsum dolor sit</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="mn-img">
+                                    <img src="~/img/news-350x223-3.jpg" />
+                                    <div class="mn-title">
+                                        <a href="">Lorem ipsum dolor sit</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="mn-img">
+                                    <img src="~/img/news-350x223-3.jpg" />
+                                    <div class="mn-title">
+                                        <a href="">Lorem ipsum dolor sit</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="mn-img">
+                                    <img src="~/img/news-350x223-3.jpg" />
+                                    <div class="mn-title">
+                                        <a href="">Lorem ipsum dolor sit</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="mn-img">
+                                    <img src="~/img/news-350x223-3.jpg" />
+                                    <div class="mn-title">
+                                        <a href="">Lorem ipsum dolor sit</a>
+                                    </div>
+                                </div>
+                            </div>*@
+                    }
+                </div>
+            </div>
+
+            @*<div class="col-lg-3">
+                    <div class="mn-list">
+                        <h2>Read More</h2>
+                        <ul>
+                            <li><a href="">Lorem ipsum dolor sit amet</a></li>
+                            <li><a href="">Pellentesque tincidunt enim libero</a></li>
+                            <li><a href="">Morbi id finibus diam vel pretium enim</a></li>
+                            <li><a href="">Duis semper sapien in eros euismod sodales</a></li>
+                            <li><a href="">Vestibulum cursus lorem nibh</a></li>
+                            <li><a href="">Morbi ullamcorper vulputate metus non eleifend</a></li>
+                            <li><a href="">Etiam vitae elit felis sit amet</a></li>
+                            <li><a href="">Nullam congue massa vitae quam</a></li>
+                            <li><a href="">Proin sed ante rutrum</a></li>
+                            <li><a href="">Curabitur vel lectus</a></li>
+                        </ul>
+                    </div>
+                </div>*@
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+
+<style>
+    #articles .articles-wrapper .articles .article .image-container {
+        background-image: url("/Content/Images/corona.png");
+                                    background-image: url(/PhysicalStorage/9383cf7c-13d2-40e4-9efd-a2c453cb768b.png);
+                                    background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    .mrgn-right {
+        margin: 0 72vw 0 0;
+    }
+
+    @@media only screen and (max-width: 990px) {
+        .mrgn-right {
+            display: none;
+        }
+    }
+</style>
+<div id="articles">
+    <div>
+        <h2 class="main-title my-5">
+            نیمچه دیجی کالا
+        </h2>
+        <div class=" mb-3 inpute-search-w mrgn-right">
+            <button class="bg-icon-serach">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search text-white" viewBox="0 0 16 16">
+                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"></path>
+                </svg>
+            </button>
+            <input type="text" class="input-text-srch" placeholder="جستجو">
+        </div>
+    </div>
+
+    <div class="articles-content">
+        <div class="articles-header mb-3 ">
+            همه ی کالا ها
+        </div>
+        <div class="articles-wrapper ">
+            <div id="articles-items" class="articles d-flex  flex-wrap">
+                @foreach (var item in Model)
+                {
+                    <a href="@Url.Action("Details","Articles",new { Id=item.ID })" class="article mt-4 mx-2 text-dark">
+                        @if (item.AttachmentImageId is null)
+                        {
+                            <div class="image-container">
+                                <div class="upload-date"> ‏@item.CreatedTime </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="image-container" style="background-image:url('@item.AttachmentImageSource')">
+                                <div class="upload-date"> ‏@item.CreatedTime </div>
+                            </div>
+                        }
+
+                        <div class="article-title">
+                            @item.Name
+                        </div>
+                    </a>
+                }
+
+            </div>
+            @if (Model.Count() > 8)
+            {
+                <div class="d-flex justify-content-center mt-5 mb-5">
+                    <a id="more-articles" onclick="getMoreArticles()" class="ex_btn" href="#">همه کالا ها</a>
+                </div>
+            }
+        </div>
+    </div>
+</div>-->
+@*<div>
+        <div class="col-sm-12 d-sm-none my-4">
+            <div class="podcasts-wrapper">
+                <div class="title-wrapper">
+                    <div class="title mr-3">
+                        پادکست ها
+                    </div>
+                    <div class="page-index mr-3">
+                        <span class="page-number"> <a href="">1</a> </span>
+                        <span class="page-number"> <a href="">2</a> </span>
+                        <span class="page-number"> <a href=""></a> </span>
+                    </div>
+                </div>
+                <div class="podcast-content">
+                    <div class="podcast-item d-flex align-items-center mt-4 mx-2">
+                        <img class="podcast-image" class="/Content/Images/Career-eleman.png" src="" alt="">
+                        <div class="mr-3">
+                            <div class="upload-date">
+                                ‏99/10/5
+                            </div>
+                            <div class="title">
+                                چطور به بعضی از مشتریان خود نه بگوییم؟
+                            </div>
+                        </div>
+                    </div>
+                    <div class="podcast-item d-flex align-items-center mt-4 mx-2">
+                        <img class="podcast-image" class="/Content/Images/Career-eleman.png" src="" alt="">
+                        <div class="mr-3">
+                            <div class="upload-date">
+                                ‏99/10/5
+                            </div>
+                            <div class="title">
+                                چطور به بعضی از مشتریان خود نه بگوییم؟
+                            </div>
+                        </div>
+                    </div>
+                    <div class="podcast-item d-flex align-items-center mt-4 mx-2">
+                        <img class="podcast-image" class="/Content/Images/Career-eleman.png" src="~/Content/Images/" alt="">
+                        <div class="mr-3">
+                            <div class="upload-date">
+                                ‏99/10/5
+                            </div>
+                            <div class="title">
+                                چطور به بعضی از مشتریان خود نه بگوییم؟
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>*@
+<!--@section scripts
+{
+    <script>
+        var articlesCount;
+        window.onload= function() {
+            articlesCount= @Model.Count()+4;
+        }
+        var getMoreArticles = () => {
+            $.ajax({
+                url: '/Articles/GetArticles',
+                type: 'Get',
+                data: { count: articlesCount },
+                dataType: 'json',
+                success: function(html) {
+                    if (articlesCount>=@Model.Count()) {
+                        $("#more-articles").hide();
+                    }
+                    articlesCount += 4;
+
+                    $("#articles-items").html("");
+                    html.forEach( item =>{
+                        $("#articles-items").append(`
+                            <a href="/Articles/Details/${item.Id}" class="article mt-4 mx-2 text-dark">
+                                <div class="image-container">
+                                    <div class="article-status"> ${item.Type} </div>
+                                    <div class="upload-date"> ${item.CreatedDate} </div>
+                                </div>
+                            <div class="tags-container mt-2 d-flex"></div>
+                            <div class="article-title">
+                                ${item.Title}
+                            </div>
+                        </a>
+                        `);
+                    });
+                },
+                error: function(error) {
+                    console.log('error');
+                }
+            });
+
+        }
+        //$("#articles-items").append("<div class=\"article mt-4 mx-2\">مقاله</div>");
+
+    </script>
+}-->

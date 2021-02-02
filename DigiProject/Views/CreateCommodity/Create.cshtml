@@ -1,0 +1,132 @@
+﻿@using DigiProject.Controllers;
+@model CommodityNumber
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+
+<table class="table">
+    <tr>
+        <th style="text-align:center">
+            Commodity Category
+        </th>
+        <th style="text-align:center">
+            Commodity count
+        </th>
+        <th style="text-align:center">
+            Action
+        </th>
+    </tr>
+
+
+    <tr>
+        <td align="center">
+            @Html.Label("Assembled Cases")
+        </td>
+        <td align="center">
+            @Model.AssembledCaseNumber
+        </td>
+        <td class="opr" align="center">
+            <a href="@Url.Action("Index", "AssembledCases")" class="btn btn-success btn-circle" title="Assembled case List">list</a>
+            <a href="@Url.Action("Create", "AssembledCases")" class="btn btn-primary btn-circle" title="Add new Assembled case">add</a>
+        </td>
+    </tr>
+    <tr>
+        <td align="center">
+            @Html.Label("External Hards")
+        </td>
+        <td align="center">
+            @Model.ExternalHardNumber
+        </td>
+        <td class="opr" align="center">
+            <a href="@Url.Action("Index", "ExternalHards")" class="btn btn-success btn-circle" title="External Hards List">list</a>
+            <a href="@Url.Action("Create", "ExternalHards")" class="btn btn-primary btn-circle" title="Add new External Hards">add</a>
+        </td>
+    </tr>
+    <tr>
+        <td align="center">
+            @Html.Label("Keyboards")
+        </td>
+        <td align="center">
+            @Model.KeyboardNumber
+        </td>
+        <td class="opr" align="center">
+            <a href="@Url.Action("Index", "Keyboards")" class="btn btn-success btn-circle" title="Keyboards List">list</a>
+            <a href="@Url.Action("Create", "Keyboards")" class="btn btn-primary btn-circle" title="Add new Keyboards">add</a>
+        </td>
+    </tr>
+    <tr>
+        <td align="center">
+            @Html.Label("Laptops")
+        </td>
+        <td align="center">
+            @Model.LaptopNumber
+        </td>
+        <td class="opr" align="center">
+            <a href="@Url.Action("Index", "Laptops")" class="btn btn-success btn-circle" title="Laptops List">list</a>
+            <a href="@Url.Action("Create", "Laptops")" class="btn btn-primary btn-circle" title="Add new Laptops">add</a>
+        </td>
+    </tr>
+    <tr>
+        <td align="center">
+            @Html.Label("Mobiles")
+        </td>
+        <td align="center">
+            @Model.MobileNumber
+        </td>
+        <td class="opr" align="center">
+            <a href="@Url.Action("Index", "Mobiles")" class="btn btn-success btn-circle" title="Mobiles List">list</a>
+            <a href="@Url.Action("Create", "Mobiles")" class="btn btn-primary btn-circle" title="Add new Mobiles">add</a>
+        </td>
+    </tr>
+    <tr>
+        <td align="center">
+            @Html.Label("Mobile Covers")
+        </td>
+        <td align="center">
+            @Model.MobileCoverNumber
+        </td>
+        <td class="opr" align="center">
+            <a href="@Url.Action("Index", "MobileCovers")" class="btn btn-success btn-circle" title="Mobile Covers List">list</a>
+            <a href="@Url.Action("Create", "MobileCovers")" class="btn btn-primary btn-circle" title="Add new Mobile Cover">add</a>
+        </td>
+    </tr>
+    <tr>
+        <td align="center">
+            @Html.Label("Mobile Holders")
+        </td>
+        <td align="center">
+            @Model.MobileHolderNumber
+        </td>
+        <td class="opr" align="center">
+            <a href="@Url.Action("Index", "MobileHolders")" class="btn btn-success btn-circle" title="Mobile Holders List">list</a>
+            <a href="@Url.Action("Create", "MobileHolders")" class="btn btn-primary btn-circle" title="Add new Mobile Holder">add</a>
+        </td>
+    </tr>
+    <tr>
+        <td align="center">
+            @Html.Label("Monitors")
+        </td>
+        <td align="center">
+            @Model.MonitorNumber
+        </td>
+        <td class="opr" align="center">
+            <a href="@Url.Action("Index", "Monitors")" class="btn btn-success btn-circle" title="Monitors List">list</a>
+            <a href="@Url.Action("Create", "Monitors")" class="btn btn-primary btn-circle" title="Add new Monitor">add</a>
+        </td>
+    </tr>
+    <tr>
+        <td align="center">
+            @Html.Label("Power Banks")
+        </td>
+        <td align="center">
+            @Model.PowerBasnkNumber
+        </td>
+        <td class="opr" align="center">
+            <a href="@Url.Action("Index", "PowerBanks")" class="btn btn-success btn-circle" title="Power Banks List">list</a>
+            <a href="@Url.Action("Create", "PowerBanks")" class="btn btn-primary btn-circle" title="Add new Power Bank">add</a>
+        </td>
+    </tr>
+</table>

@@ -1,0 +1,154 @@
+﻿@model Domain.Models.ExternalHard
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ExternalHard</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.AttachmentFile.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AttachmentFile.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Color)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Color)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Weight)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Weight)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Customer)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Customer)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Type)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Remaining)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Remaining)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SalesNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SalesNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Brand)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Brand)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ImmediateSending)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ImmediateSending)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Model)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Model)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ConnectionType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ConnectionType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StirageType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StirageType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WaterResistance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WaterResistance)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ImpactResistance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ImpactResistance)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

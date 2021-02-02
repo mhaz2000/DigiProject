@@ -1,0 +1,226 @@
+﻿@using Services.Services
+@model DigiProject.Controllers.LaptopDetails
+
+@{
+    ViewBag.Title = "LaptopDetail";
+}
+
+<style>
+    th, tr {
+        text-align: center
+    }
+
+    textarea {
+        margin-left: 178px;
+        text-align-last: end;
+    }
+</style>
+
+<h2 style="text-align:center"><b>@Model.LaptopDto.Name</b></h2>
+
+<div style=" display: flex; JUSTIFY-CONTENT: center; ALIGN-ITEMS: center;" }>
+    @if (Model.LaptopDto.AttachmentImageId != null)
+    {
+        var attachmentImageSrc = new AttachmentFileService().GetAttachmentSourceValue(Model.LaptopDto.AttachmentImageId);
+
+        <img src="@attachmentImageSrc" alt="@Model.LaptopDto.Name" title="@Model.LaptopDto.Name" style="width:960px; height:640px;" />
+    }
+    else
+    {
+        <img src="~/img/download.png" alt="@Model.LaptopDto.Name" title="@Model.LaptopDto.Name" style="width:960px; height:640px;" />
+    }
+</div>
+
+<br />
+<br />
+
+<b style="font-size:25px">توضیحات</b>
+<p style="font-size:20px">
+    @Model.LaptopDto.Description
+</p>
+
+<br />
+<br />
+
+<p style="text-align:left; text-align:right">
+    <b style="font-size:20px">
+        اطلاعات محصول
+    </b>
+</p>
+<div style="overflow-x: overlay;">
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.LaptopDto.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LaptopDto.Color)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LaptopDto.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LaptopDto.Weight)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LaptopDto.Brand)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LaptopDto.ImmediateSending)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LaptopDto.CreatedTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LaptopDto.LaptopRam)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LaptopDto.IsTouchable)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LaptopDto.ScreenSize)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LaptopDto.MatteImage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LaptopDto.RAM_Type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LaptopDto.RAM_Size)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LaptopDto.ScreenResolution)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LaptopDto.GPU_Company)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LaptopDto.GPU_Size)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LaptopDto.CPU)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LaptopDto.OS)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LaptopDto.InternalStorage)
+            </th>
+            <th></th>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => Model.LaptopDto.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.LaptopDto.Color)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.LaptopDto.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.LaptopDto.Weight)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.LaptopDto.Brand)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.LaptopDto.ImmediateSending)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.LaptopDto.CreatedTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.LaptopDto.LaptopRam)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.LaptopDto.IsTouchable)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.LaptopDto.ScreenSize)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.LaptopDto.MatteImage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.LaptopDto.RAM_Type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.LaptopDto.RAM_Size)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.LaptopDto.ScreenResolution)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.LaptopDto.GPU_Company)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.LaptopDto.GPU_Size)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.LaptopDto.CPU)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.LaptopDto.OS)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.LaptopDto.InternalStorage)
+            </td>
+        </tr>
+    </table>
+</div>
+
+<br />
+<br />
+<br />
+
+<b style="font-size:25px">نظرات</b>
+<hr />
+<div>
+    @if (Model.CommentDtos.Count() == 0)
+    {
+        <p style="text-align:center;font-size:30px">
+            <b>تاکنون هیچ نظری ثبت نشده است</b>
+        </p>
+    }
+    else
+    {
+        foreach (var item in Model.CommentDtos)
+        {
+            <div style="font-size:17px;">
+                <b style="color: red">@item.Name</b> می گوید:
+            </div>
+            <br />
+            <p>
+                @item.Content
+            </p>
+        }
+    }
+</div>
+<hr />
+<div>
+    <form action="@Url.Action("Create","Comments")" method="POST">
+        <div class="form-group">
+            @Html.Label("نام و نام خانوادگی", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="" style="direction: ltr;">
+                <input name="name" type="text" id="name" placeholder="نام و نام خانوادگی" class="form-control" />
+            </div>
+        </div>
+        <br />
+        <div class="form-group">
+            @Html.Label("شرح", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="" style="direction:ltr">
+                <textarea name="description" id="description" class="form-control" style="width:400px; height:200px"></textarea>
+                <input name="Id" value="@Model.LaptopDto.ID" hidden />
+                <input name="action" value="LaptopDetail" hidden />
+                <input name="controller" value="Laptops" hidden />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-1">
+                <input type="submit" value="Submit" class="btn btn-default" />
+            </div>
+        </div>
+    </form>
+</div>
