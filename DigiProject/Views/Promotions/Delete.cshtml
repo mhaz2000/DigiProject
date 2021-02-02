@@ -1,14 +1,24 @@
-﻿@model Domain.Models.Promotion
+﻿@model Infrastructure.DtoModels.PromotionDto
 
 @{
     ViewBag.Title = "Delete";
 }
 
-<h2>Delete</h2>
+<style>
+    dd {
+        text-align: center !important;
+        margin: 5px 0;
+    }
 
-<h3>Are you sure you want to delete this?</h3>
+    dt {
+        text-align: center !important;
+        margin: 5px 0;
+    }
+</style>
+<h2 dir="ltr">Delete</h2>
+
+<h3 dir="ltr">Are you sure you want to delete this?</h3>
 <div>
-    <h4>Promotion</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -37,10 +47,11 @@
 
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
+        <div class="form-actions danger">
             <input type="submit" value="Delete" class="btn btn-default" /> |
             @Html.ActionLink("Back to List", "Index")
         </div>

@@ -124,7 +124,7 @@
 
         <div class="form-group">
             @Html.LabelFor(model => model.WirelessCharging, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="col-md-5">
                 <div class="checkbox">
                     @Html.EditorFor(model => model.WirelessCharging)
                     @Html.ValidationMessageFor(model => model.WirelessCharging, "", new { @class = "text-danger" })
@@ -134,7 +134,7 @@
 
         <div class="form-group">
             @Html.LabelFor(model => model.Rechargeable, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="col-md-5">
                 <div class="checkbox">
                     @Html.EditorFor(model => model.Rechargeable)
                     @Html.ValidationMessageFor(model => model.Rechargeable, "", new { @class = "text-danger" })

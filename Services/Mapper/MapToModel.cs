@@ -144,6 +144,7 @@ namespace Services.Mapper
                 Price = externalHard.Price,
                 Remaining = externalHard.Remaining,
                 SalesNumber = externalHard.SalesNumber,
+                Model = externalHard.Model,
                 StirageType = externalHard.StirageType,
                 Type = externalHard.Type,
                 WaterResistance = externalHard.WaterResistance,
@@ -172,6 +173,7 @@ namespace Services.Mapper
                 ConnectorType = keyboard.ConnectorType,
                 HaveMouse = keyboard.HaveMouse,
                 ImmediateSending = keyboard.ImmediateSending,
+                Model = keyboard.Model,
                 LiquidResistance = keyboard.LiquidResistance,
                 MicrophoneInput = keyboard.MicrophoneInput,
                 Name = keyboard.Name,
@@ -326,6 +328,7 @@ namespace Services.Mapper
                 Resolution = monitor.Resolution,
                 ResponseTime = monitor.ResponseTime,
                 SalesNumber = monitor.SalesNumber,
+                Model = monitor.Model,
                 Speaker = monitor.Speaker,
                 Type = monitor.Type,
                 USB_Port = monitor.USB_Port,
@@ -394,8 +397,9 @@ namespace Services.Mapper
             {
                 Type = promotion.Type,
                 Percent = promotion.Percent,
-                Status = promotion.Status
-            };
-        }
+                Status = promotion.Status,
+                ID = promotion.ID != Guid.Empty ? promotion.ID : Guid.NewGuid()
+        };
     }
+}
 }

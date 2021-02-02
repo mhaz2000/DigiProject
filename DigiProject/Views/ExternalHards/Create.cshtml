@@ -26,7 +26,7 @@
     }
 </style>
 
-<h2>Create</h2>
+<h2 dir="ltr">Create</h2>
 
 
 @using (Html.BeginForm("Create", "ExternalHards", FormMethod.Post, new { @enctype = "multipart/form-data" }))
@@ -34,7 +34,7 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>ExternalHard</h4>
+        <h4 dir="ltr">ExternalHard</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
